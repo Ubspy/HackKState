@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>MewsicGen 1.0</title>
+	<meta version="1.0" charset="UTF-8" lang="en-us">
+
+	<!--Bootstrap-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+
+<style>
+
+body
+{
+	overflow: hidden;
+}
+
+/*.verticalLine {
+  border-left: thick solid black;
+  height:100vh;
+  margin-left: 550px;
+  color: black;
+}*/
+
+#proceduralGenButton
+{
+	width: 45%;
+	height: 45%;
+	background-color: #f0ff8e;
+	position: absolute;
+	left:30px;
+	top:50%;
+	transition: opacity .3s;
+	cursor: pointer;
+	border: 1px dashed black;
+	padding:5%;
+}
+
+#proceduralGenButton:hover
+{
+	opacity: 0.3;
+}
+
+#guidedGenButton
+{
+	width: 45%;
+	height: 45%;
+	background-color: #8effb2;
+	position: absolute;
+	right:30px;
+	top:50%;
+	transition: opacity .3s;
+	cursor: pointer;
+	border: 1px dashed black;
+	padding:5%;
+}
+
+#guidedGenButton:hover
+{
+	opacity: 0.3;
+}
+
+.unpretty {
+  color:inherit;
+  text-decoration: none;
+ }
+
+ .unpretty:hover {
+  color:inherit;
+  text-decoration: none;
+ }
+
+</style>
+
+<body>
+
+	<div class="jumbotron jumbotron-fluid" style="height:120vh;background-color:#8e8e8e !important;">
+	  <div class="container">
+	    
+	    <!-- yeah whatever center is deprecated idk ok go away -->
+	  	<center>
+	  		<img style="width:128px;height:128px;" src="mewsiclogo.png">
+	  		<h1 class=".text-center">MewsicGen</h1>
+	  		<p id="desc"><em>Generates a random song -- first choose a method -- made for <a href="http://hackkstate.tech/">Hack K-State 2017</a></em></p><br>
+	  		<div class="verticalLine" ></div>
+	  		<a href="proceduralGeneration.php" class="unpretty"><div id="proceduralGenButton">
+	  			<center>
+	  				<h1>Procedural Generation</h1>
+	  				<p>Generates a random song using cellular autonoma, and a normalized curve algorithm. Uses keys from the cycle of fourths to determine valid notes to use in the song.</p>
+	  			</center>
+	  		</div></a>
+	  		<a href="guidedGeneration.php" class="unpretty"><div id="guidedGenButton">
+	  			<center>
+	  				<h1>Guided Generation</h1>
+	  				<p>Generates a weighted probability map from pre-existing songs using their notes and compiling their probabilities, and then using that to create multiple notes</p>
+	  			</center>
+	  		</div></a>
+	  	</center>
+
+	  </div>
+	</div>	
+
+	<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+	<script>
+	$(document).ready(function() {
+	  $('.jumbotron').hide().fadeIn(2000,function() {console.log("done")}); 
+	 });  
+	</script> 
+</body>
+
+</html>
