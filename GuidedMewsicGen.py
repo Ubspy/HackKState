@@ -28,17 +28,29 @@ synths = {
 	'p': pysynth_p,
 	's': pysynth_s
 } # so each synth can be recognized when passed in argv
-
+print(sys.argv)
 '''
 
 	argv breakdown:
-		argv[0] is duration of the song in seconds
-		argv[1] is the synthesizer that the gen will use in a,b,c format
-		argv[2] is the songs that the user will be using for their predictive input
-		argv[3] is the bpm or tempo of the song
+		argv[1] is the number of random notes the user wants
+		argv[2] is the synthesizer that the gen will use in a,b,c format
+		argv[3] is the songs that the user will be using for their predictive input
+		argv[4] is the bpm or tempo of the song
+		argv[5] is where the file will be stored
 
 '''
-synthToUse = synths[sys.argv[1]]
+notes = sys.argv[1]
+synthToUse = synths[sys.argv[2]]
+songsList = sys.argv[3]
+tempo = sys.argv[4]
+filePlace = sys.argv[5]
+
+
+
+songsList = songsList.split(",") # should be passed into argv in comma delimited form
+tempo = int(tempo)
+notes = int(notes)
+combinedNotes = []
 
 '''
 	
@@ -98,8 +110,11 @@ def generateNotes(songArray, numberOfNotes):
 
 	return noteTuple
 
-#print(generateNotes(songs["moonlightsonata"],100))
+def generateWave(synth,notes,tempo,fileLoc):
+	synthToUse.make_wav(generateNotes(notes,100), fn=fileLoc)
 
+for i in songsList:
+	combinedNotes += songs[i]
+combinedNotes = uniquify(combinedNotes)
 
-def generateWave(duration,synth,tempo,fileLoc):
-	synthToUse.make_wav(generateNotes(songs["moonlightsonata"]+songs["furelise"],100), fn=fileLoc)
+generateWave(synthToUse,combinedNotes,tempo,filePlace)
