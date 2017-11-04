@@ -194,16 +194,25 @@ def changeNotes(noteList, noteTuple):
     return newNoteTuple
 
 
-def makeSongLouder():
-    song = AudioSegment.from_wav(Input.songName)
-    song += 5
-    song.export(Input.songName, "wav")
-
-
 def getInputValues():
     Input.songLength = getSongLength()
     Input.BPM = getBPM()
     Input.key = getKeySignature()
+
+
+def cleanUpSong():
+    # Opens new file
+    song = AudioSegment.from_wav("sound.wav")
+
+    # Adds gain to file
+    song += 5
+    
+    # Deletes empty 2 seconds at the end
+    duration = len(song)
+    song = song[:(duration - 1900)]
+    
+    # Exports it back out
+    song.export(Input.songName, "wav")
 
 
 
@@ -218,8 +227,10 @@ def generateMusic():
 
     notesTuple = changeNotes(notesList, notesTuple)
 
-    pysynth_b.make_wav(notesTuple, fn=Input.songName, bpm=120, silent=False)
-    makeSongLouder()
+    pysynth_b.make_wav(notesTuple, fn=Input.songName, bpm=Input.BPM, silent=False)
+
+    cleanUpSong()
+
 
 if len(sys.argv) == 4:
     getInputValues()
