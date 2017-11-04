@@ -14,6 +14,8 @@
 
 '''
 
+#!/usr/bin/python3.5
+
 import sys #argv and such
 import pysynth, pysynth_b, pysynth_c, pysynth_d, pysynth_e, pysynth_p, pysynth_s #all available synths
 from numpy.random import choice #weighted probability choosing

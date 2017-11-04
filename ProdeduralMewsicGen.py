@@ -1,12 +1,15 @@
+#!/usr/bin/python3.5
+
 import pysynth_b
 import random
 from pydub import AudioSegment
 import math
+import sys
 
 class Input:
-    BPM = 0
-    songLength = 0
-    key = 0
+    BPM = 120
+    songLength = 50
+    key = 'C'
     songName = "sound.wav"
 
 
@@ -27,24 +30,26 @@ keySignatures = {
 }
 
 def getBPM():
-    if Input.BPM == 0:
-        # Creates random BPM in between 80 and 160
-        return random.randrange(80, 160)
+    # Creates random BPM in between 80 and 160
+    return int(sys.argv[1])
 
 
 def getSongLength():
-    if Input.songLength == 0:
-        # Creates random song length between 5 and 20 seconds
-        return random.randrange(20, 100)
+    # Creates random song length between 5 and 20 seconds
+    return int(sys.argv[2]) * 2
+
 
 def getKeySignature():
-    if Input.key == 0:
+    if sys.argv[3] == 'random':
         return random.choice(list(keySignatures.keys()))
+    else:
+        return sys.argv[3]
 
 
 def findBeatsInSong():
     # Gets the beats in the song by finding beats per second, then multiplying by length
     return int((Input.BPM / 60) * Input.songLength)
+
 
 def generateNotePatern(listLength):
     # Make empty list for ntoes
@@ -195,21 +200,29 @@ def makeSongLouder():
     song.export(Input.songName, "wav")
 
 
-Input.songLength = getSongLength()
-Input.BPM = getBPM()
-Input.key = getKeySignature()
+def getInputValues():
+    Input.songLength = getSongLength()
+    Input.BPM = getBPM()
+    Input.key = getKeySignature()
 
-print(Input.key)
 
-cellularListLength = findBeatsInSong()
-cellularList = generateNotePatern(cellularListLength)
 
-notesTuple = createNoteTuple(cellularList)
+def generateMusic():
+    cellularListLength = findBeatsInSong()
+    cellularList = generateNotePatern(cellularListLength)
 
-notesListLength = findNumberOfNotes(notesTuple)
-notesList = generateNotes(notesListLength)
+    notesTuple = createNoteTuple(cellularList)
 
-notesTuple = changeNotes(notesList, notesTuple)
+    notesListLength = findNumberOfNotes(notesTuple)
+    notesList = generateNotes(notesListLength)
 
-pysynth_b.make_wav(notesTuple, fn=Input.songName, bpm=120, silent=False)
-makeSongLouder()
+    notesTuple = changeNotes(notesList, notesTuple)
+
+    pysynth_b.make_wav(notesTuple, fn=Input.songName, bpm=120, silent=False)
+    makeSongLouder()
+
+if len(sys.argv) == 4:
+    getInputValues()
+    generateMusic()
+else:
+    print("Not the right number of arguments: <bpm> <length> <key>")
