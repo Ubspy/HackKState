@@ -122,11 +122,12 @@ def findNote(currentNote, currentOctave, spaceBetweenNotes):
     octaveMove = 0
 
     # If it needs to move between octaves
-    if noteIndex + spaceBetweenNotes < 0 or noteIndex + spaceBetweenNotes > 6:
-        if int(currentOctave) <= 1 or int(currentOctave) >= 7:
-            spaceBetweenNotes = -spaceBetweenNotes
-
+    if (noteIndex + spaceBetweenNotes) < 0 or (noteIndex + spaceBetweenNotes) > 6:
         octaveMove = math.floor((spaceBetweenNotes + noteIndex) / 7)
+
+        if int(currentOctave) + octaveMove <= 2 or int(currentOctave) + octaveMove >= 6:
+            octaveMove = -octaveMove
+
         indexOfNewNote = (spaceBetweenNotes - (octaveMove * 7)) + noteIndex
     else:
         indexOfNewNote = spaceBetweenNotes + noteIndex
@@ -212,5 +213,5 @@ notesList = generateNotes(notesListLength)
 
 notesTuple = changeNotes(notesList, notesTuple)
 
-pysynth_b.make_wav(notesTuple, fn=Input.songName, bpm=120, repeat=1, silent=False)
+pysynth_b.make_wav(notesTuple, fn=Input.songName, bpm=120, silent=False)
 makeSongLouder()
