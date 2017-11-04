@@ -1,34 +1,68 @@
-import wave, struct, math
+import pysynth_b
+import random
 
-RATE = 44100.0 # hertz
-SINCONST = 32767
 
-wavef = wave.open('sound.wav','w')
-wavef.setnchannels(2)
-wavef.setsampwidth(2)
-wavef.setframerate(RATE)
+BPM = 120
 
-def createTone(frequency, length):
-    frames = []
+songLength = 5.0
 
-    for i in range(int(length * RATE)):
-        sinValue = int(SINCONST * math.sin(i * math.pi * frequency / float(RATE)))
-        data = struct.pack('<h', sinValue)
-        frames.append(data)
-        # wavef.writeframesraw(data)
+beatsInSong = BPM * songLength / 60
+cellularListLength = round(beatsInSong * 16)
 
-    return frames
+cellularList = []
 
-def writeSound(sound):
-    for i in sound:
-        wavef.writeframesraw(i)
+for i in range(0, cellularListLength):
+    chance = random.uniform(0, 1)
+    if chance <= 0.13:
+        cellularList.append(1)
+    elif chance >= 0.13 and chance <= 0.67:
+        cellularList.append(2)
+    else:
+        cellularList.append(0)
 
-sound1 = createTone(300, 1)
-sound2 = createTone(500, 1)
+print(cellularList)
 
-writeSound(sound1)
-writeSound(sound2)
+notesTuple = ()
 
-#wavef.writeframesraw(createTone(300, 1))
-wavef.writeframes('')
-wavef.close()
+index = 0
+
+def findNextNumInArray(currentIndex):
+    if currentIndex != len(cellularList) - 1:
+        return cellularList[currentIndex + 1]
+
+while index <= len(cellularList) - 1:
+    if cellularList[index] == 0:
+        notesTuple += ('r', 16),
+        index += 1
+    elif cellularList[index] == 1 or cellularList[index] == 2:
+        hold = 0
+        while findNextNumInArray(index + hold) == 2:
+            hold += 1
+        if hold == 0:
+            notesTuple += ('c4', 16),
+            index += 1
+        else:
+            notesTuple += ('c4', float(16 / (hold + 1))),
+            index += hold
+
+pysynth_b.make_wav(notesTuple, fn="sound.wav")
+
+print(notesTuple)
+
+noteTypes = {'quarter': 4, 'half': 2, 'whole': 1, 'eighth': 8, 'sixteenth': 16}
+
+
+
+'''
+furElise = wave.open('furElise.mp3')
+length = furElise.getnframes()
+
+for i in len(length):
+    data = furElise.readframes(CHUNK)
+'''
+
+#print(data)
+
+#def generateNotePatern():
+
+#pysynth.make_wav(test, fn = "sound.wav")
