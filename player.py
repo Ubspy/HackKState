@@ -126,7 +126,8 @@ def findNote(currentNote, currentOctave, spaceBetweenNotes):
         octaveMove = math.floor((spaceBetweenNotes + noteIndex) / 7)
 
         if int(currentOctave) + octaveMove <= 2 or int(currentOctave) + octaveMove >= 6:
-            octaveMove = -octaveMove
+            spaceBetweenNotes = spaceBetweenNotes * -1
+            octaveMove = math.floor((spaceBetweenNotes + noteIndex) / 7)
 
         indexOfNewNote = (spaceBetweenNotes - (octaveMove * 7)) + noteIndex
     else:
