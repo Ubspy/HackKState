@@ -217,16 +217,17 @@ def cleanUpSong():
 
 
 def generateMusic():
-    cellularListLength = findBeatsInSong()
-    cellularList = generateNotePatern(cellularListLength)
+    cellularListLength = findBeatsInSong() # Finds beets in the song
+    cellularList = generateNotePatern(cellularListLength) # Finds list of rythm notes
 
-    notesTuple = createNoteTuple(cellularList)
+    notesTuple = createNoteTuple(cellularList) # Creates tuple for pysynth
 
-    notesListLength = findNumberOfNotes(notesTuple)
-    notesList = generateNotes(notesListLength)
+    notesListLength = findNumberOfNotes(notesTuple) # Finds length for melody creation
+    notesList = generateNotes(notesListLength) # Creates melody note list
 
-    notesTuple = changeNotes(notesList, notesTuple)
+    notesTuple = changeNotes(notesList, notesTuple) # Creates tuple for pysynth
 
+    # Exports file
     pysynth_b.make_wav(notesTuple, fn=Input.songName, bpm=Input.BPM, silent=False)
 
     cleanUpSong()
