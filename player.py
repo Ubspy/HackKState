@@ -1,65 +1,73 @@
 import pysynth_b
 import random
 
+class Input:
+    BPM = 0
+    songLength = 0
 
-BPM = 120
+def getBPM():
+    if Input.BPM == 0:
+        return random.randrange(80, 160)
 
-songLength = 5.0
+def getSongLength():
+    if Input.songLength == 0:
+        return random.randrange(5, 20)
 
-beatsInSong = BPM * songLength / 60
-cellularListLength = round(beatsInSong * 16)
 
-cellularList = []
+def findBeatsInSong():
+    beatsInSong = int((Input.BPM / 60) * Input.songLength)
+    return beatsInSong
 
-for i in range(0, cellularListLength):
-    chance = random.uniform(0, 1)
-    if chance <= 0.13:
-        cellularList.append(1)
-    elif chance >= 0.13 and chance <= 0.67:
-        cellularList.append(2)
-    else:
-        cellularList.append(0)
 
-print(cellularList)
+def generateNotePatern(listLength):
+    noteList = []
 
-notesTuple = ()
-
-index = 0
-
-def findNextNumInArray(currentIndex):
-    if currentIndex != len(cellularList) - 1:
-        return cellularList[currentIndex + 1]
-
-while index <= len(cellularList) - 1:
-    if cellularList[index] == 0:
-        notesTuple += ('r', 16),
-        index += 1
-    elif cellularList[index] == 1 or cellularList[index] == 2:
-        hold = 0
-        while findNextNumInArray(index + hold) == 2:
-            hold += 1
-        if hold == 0:
-            notesTuple += ('c4', 16),
-            index += 1
+    for i in range(0, listLength - 1):
+        chance = random.uniform(0, 1)
+        if chance <= 0.13:
+            noteList.append(1)
+        elif chance >= 0.13 and chance <= 0.67:
+            noteList.append(2)
         else:
-            notesTuple += ('c4', float(16 / (hold + 1))),
-            index += hold
+            noteList.append(0)
 
-pysynth_b.make_wav(notesTuple, fn="sound.wav")
+    return noteList
 
-print(notesTuple)
+def findNextNumInArray(list, currentIndex):
+    if currentIndex != len(list) - 1:
+        return list[currentIndex + 1]
 
-noteTypes = {'quarter': 4, 'half': 2, 'whole': 1, 'eighth': 8, 'sixteenth': 16}
+def createNoteTuple(noteList):
+    index = 0
+    notesTuple = ()
 
+    while index <= len(noteList) - 1:
+        print(index)
 
+        if noteList[index] == 0:
+            notesTuple += ('r', 16),
+            index += 1
+        elif noteList[index] == 1 or noteList[index] == 2:
+            hold = 0
+            while findNextNumInArray(noteList, index + hold) == 2:
+                hold += 1
+            if hold == 0:
+                notesTuple += ('c4', 8),
+                index += 1
+            else:
+                notesTuple += ('c4', float(8 / (hold + 1))),
+                index += hold + 1
+    return notesTuple
 
-'''
-furElise = wave.open('furElise.mp3')
-length = furElise.getnframes()
+Input.songLength = getSongLength()
+Input.BPM = getBPM()
 
-for i in len(length):
-    data = furElise.readframes(CHUNK)
-'''
+cellularListLength = findBeatsInSong()
+cellularList = generateNotePatern(cellularListLength)
+
+notesTuple = createNoteTuple(cellularList)
+
+pysynth_b.make_wav(notesTuple, fn="sound.wav", bpm = 120, repeat=1, boost=1.2, silent=False)
 
 #print(data)
 
