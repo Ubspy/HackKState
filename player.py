@@ -3,9 +3,6 @@ import random
 from pydub import AudioSegment
 import math
 
-from reportlab.graphics.charts.axes import _isListOfDaysAndMonths
-
-
 class Input:
     BPM = 0
     songLength = 0
@@ -38,7 +35,7 @@ def getBPM():
 def getSongLength():
     if Input.songLength == 0:
         # Creates random song length between 5 and 20 seconds
-        return random.randrange(5, 20)
+        return random.randrange(20, 100)
 
 def getKeySignature():
     if Input.key == 0:
