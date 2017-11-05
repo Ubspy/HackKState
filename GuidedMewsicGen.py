@@ -28,9 +28,8 @@ synths = {
 	'p': pysynth_p,
 	's': pysynth_s
 } # so each synth can be recognized when passed in argv
-print(sys.argv)
-'''
 
+'''
 	argv breakdown:
 		argv[1] is the number of random notes the user wants
 		argv[2] is the synthesizer that the gen will use in a,b,c format

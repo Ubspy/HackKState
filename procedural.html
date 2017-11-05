@@ -128,10 +128,46 @@
 					<option value="synth-s">Synth S - Karplus-Strong</option>
 				</select>
 
-				<button onclick="toWriteHere();" id="generate-button">Generate</button>
+				<button onclick="generate();" id="generate-button">Generate</button>
 			</div>
 		</div>
 	</div>
+
+	<script>
+		
+		function generate()
+		{
+			var bpm = document.getElementById("number-in").value;
+			var length = document.getElementById("number-in2").value;
+
+			var key = document.getElementById("key-in").value;
+			var synth = document.getElementById("synth-in").value;
+
+			post("musicPlayer.php",{mode: 1, data: [bpm, length, key, synth]});
+		}
+
+		function post(path, params)
+		{
+		    var form = document.createElement("form");
+		    form.setAttribute("method", "post");
+		    form.setAttribute("action", path);
+
+		    for(var key in params) {
+		        if(params.hasOwnProperty(key)) {
+		            var hiddenField = document.createElement("input");
+		            hiddenField.setAttribute("type", "hidden");
+		            hiddenField.setAttribute("name", key);
+		            hiddenField.setAttribute("value", params[key]);
+
+		            form.appendChild(hiddenField);
+		        }
+		    }
+
+		    document.body.appendChild(form);
+		    form.submit();
+		}
+
+	</script>
 
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </body>

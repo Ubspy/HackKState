@@ -1,6 +1,6 @@
 #!/usr/bin/python3.5
 
-import pysynth_b
+import pysynth, pysynth_b, pysynth_c, pysynth_d, pysynth_e, pysynth_p, pysynth_s
 import random
 from pydub import AudioSegment
 import math
@@ -10,6 +10,7 @@ class Input:
     BPM = 120
     songLength = 50
     key = 'C'
+    synth = 'a'
     songName = "sound.wav"
 
 
@@ -29,6 +30,16 @@ keySignatures = {
     'G': ['g', 'a', 'b', 'c', 'd', 'e', 'f#']
 }
 
+synths = {
+    'a': pysynth,
+    'b': pysynth_b,
+    'c': pysynth_c,
+    'd': pysynth_d,
+    'e': pysynth_e,
+    'p': pysynth_p,
+    's': pysynth_s
+}
+
 def getBPM():
     # Creates random BPM in between 80 and 160
     return int(sys.argv[1])
@@ -44,6 +55,9 @@ def getKeySignature():
         return random.choice(list(keySignatures.keys()))
     else:
         return sys.argv[3]
+
+def getSynth():
+    return sys.argv[4]
 
 
 def findBeatsInSong():
@@ -198,6 +212,7 @@ def getInputValues():
     Input.songLength = getSongLength()
     Input.BPM = getBPM()
     Input.key = getKeySignature()
+    Input.synth = getSynth()
 
 
 def cleanUpSong():
@@ -227,13 +242,13 @@ def generateMusic():
     notesTuple = changeNotes(notesList, notesTuple) # Creates tuple for pysynth
 
     # Exports file
-    pysynth_b.make_wav(notesTuple, fn=Input.songName, bpm=Input.BPM, silent=False)
+    synths[Input.synth].make_wav(notesTuple, fn=Input.songName, bpm=Input.BPM, silent=False)
 
     cleanUpSong()
 
 
-if len(sys.argv) == 4:
+if len(sys.argv) == 5:
     getInputValues()
     generateMusic()
 else:
-    print("Not the right number of arguments: <bpm> <length> <key>")
+    print("Not the right number of arguments: <bpm> <length> <key> <synth>")
