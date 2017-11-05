@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>MewsicGen Guided</title>
+	<meta version="1.0" charset="UTF-8" lang="en-us">
+
+	<link rel='shortcut icon' type='image/x-icon' href='favicon.ico' />
+
+	<!--Bootstrap-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.1.1/css/hover-min.css" type="text/css">
+</head>
+
+<style>
+
+
+.underline
+{
+	text-decoration: underline;
+}
+
+
+#controlsSongs
+{
+	border: 3px dashed black;
+	margin-top:50px;
+}
+#controlNotes
+{
+	border: 3px dashed red;
+	margin-top:50px;
+}
+#controlSynth
+{
+	border: 3px dashed green;
+	margin-top:50px;
+}
+#controlSynth button
+{
+	margin-top: 5px;
+}
+#controlBPM
+{
+	border: 3px dashed orange;
+	margin-top: 50px;
+}
+
+body
+{
+	padding-top: 5%;
+	padding-left: 15%;
+	padding-right: 15%;
+	background-color: #8e8e8e;
+}
+
+
+</style>
+
+<body bgcolor="#8e8e8e">
+
+	
+	  <div class="container">
+	   
+	  <center>
+	  	<h1>Guided Music Generation</h1>
+	  </div>
+
+	  <script>
+
+	  	var songs = "";
+	  	var notes = 100;
+	  	var tempo = 120;
+	  	var synth = "a";
+
+	  </script>
+
+	  <div class="continer" id="controlsSongs">
+
+	  	 <p style="margin-left: 10%;margin-top:3%"><strong>Songs to train the generator on</strong></span><em> --- Some songs have sad tones, therefore creating a sadder sounding tone</em></p>
+
+		 <form style="margin-left: 10%">
+		    <input type="checkbox" id="furelise" name="furelise" value="furelise" checked>Für Elise - <em>Ludwig van Beethoven</em><br>
+		    <input type="checkbox" id="moonlightsonata" name="moonlightsonata" value="moonlightsonata">Moonlight Sonata - <em>Ludwig van Beethoven</em><br>
+		    <input type="checkbox" id="turkishmarch" name="turkishmarch" value="turkishmarch">Turkish March - <em>Wolfgang Amadeus Mozart</em><br>
+		    <input type="checkbox" id="takeonme" name="takeonme" value="takeonme">Take On Me - <em>a-ha</em><br>
+		    <input type="checkbox" id="everybodywantstoruletheworld" name="everybodywantstoruletheworld" value="everybodywantstoruletheworld">Everybody Wants to Rule the World - <em>Tears for Fears</em><br>
+		    <input type="checkbox" id="athousandmiles" name="athousandmiles" value="athousandmiles">A Thousand Miles - <em>Vanessa Carlton</em>
+		</form>
+			<br><br>
+	  </div>
+
+	  <div class="container" id="controlNotes">
+	  	<p style="margin-left: 10%;margin-top:3%"><strong>Number of randomized notes in your song</strong></span><em> --- This will be the main factor in determining the length</em></p>
+	  	
+	  	<center>
+	  	<div id="numberButtons" style="margin-bottom:15px">
+	  		<button onclick="document.getElementById('numNotes').value = 10;notes=10;">10 Notes</button>
+	  		<button onclick="document.getElementById('numNotes').value = 30;notes=30;">30 Notes</button>
+	  		<button onclick="document.getElementById('numNotes').value = 50;notes=50;">50 Notes</button>
+	  		<button onclick="document.getElementById('numNotes').value = 70;notes=70;">70 Notes</button>
+	  		<button onclick="document.getElementById('numNotes').value = 90;notes=90;">90 Notes</button>
+	  		<button onclick="document.getElementById('numNotes').value = 100;notes=100;">100 Notes</button>
+	  		<button onclick="document.getElementById('numNotes').value = 130;notes=130;">130 Notes</button>
+	  		<button onclick="document.getElementById('numNotes').value = 150;notes=150;">150 Notes</button>
+	  		<button onclick="document.getElementById('numNotes').value = 170;notes=170;">170 Notes</button>
+	  	</div>
+	  	<form>
+		    Number of Notes: <input type="text" name="numberOfNotes" id="numNotes" value="100">
+		</form>
+		</center>
+		<br><br>
+		</div>
+
+		<div class="continer" id="controlSynth">
+
+			<p style="margin-left: 10%;margin-top:3%"><strong>Synthesizer to use</strong></span><em> --- Some synths are more electronic, and some sound more like instruments</em></p>
+			<center>
+			<button id="synthA" onclick="document.getElementById('synthID').innerHTML = '<strong>A</strong>';synth='a';">Synth A -- Additive synthesis (flute, organ, piano)</button><br>
+			<button id="synthB" onclick="document.getElementById('synthID').innerHTML = '<strong>B</strong>';synth='b';">Synth B -- Additive synthesis (acoustic piano)</button><br>
+			<button id="synthC" onclick="document.getElementById('synthID').innerHTML = '<strong>C</strong>';synth='c';">Synth C -- Subtractive synthesis (bowed string, analog synth pad)</button><br>
+			<button id="synthD" onclick="document.getElementById('synthID').innerHTML = '<strong>D</strong>';synth='d';">Synth D -- Subtractive synthesis (woodwind, analog synth lead)</button><br>
+			<button id="synthE" onclick="document.getElementById('synthID').innerHTML = '<strong>E</strong>';synth='e';">Synth E -- FM/Phase modulation (DX7 Rhodes piano)</button><br>
+			<button id="synthP" onclick="document.getElementById('synthID').innerHTML = '<strong>P</strong>';synth='p';">Synth P -- Subtractive synthesis (untuned percussion hit)</button><br>
+			<button id="synthS" onclick="document.getElementById('synthID').innerHTML = '<strong>S</strong>';synth='s';">Synth S -- Karplus-Strong synthesis (plucked string, guitar, koto)</button><br><br>
+
+			<p id="synth" style="font-size:24px">Selected Synthesizer: <span id="synthID"><strong>A</strong></span></p>
+			</center>
+
+		</div>
+
+		<div class="container" id="controlBPM">
+	  	<p style="margin-left: 10%;margin-top:3%"><strong>Tempo or beats per minute</strong></span><em> --- Basically how fast the song will go</em></p>
+	  	
+	  	<center>
+	  	<div id="numberButtons" style="margin-bottom:15px">
+	  		<button onclick="document.getElementById('tempo').value = 60;tempo=60;">60 BPM</button>
+	  		<button onclick="document.getElementById('tempo').value = 80;tempo=80;">80 BPM</button>
+	  		<button onclick="document.getElementById('tempo').value = 100;tempo=100;">100 BPM</button>
+	  		<button onclick="document.getElementById('tempo').value = 110;tempo=110;">110 BPM</button>
+	  		<button onclick="document.getElementById('tempo').value = 120;tempo=120;">120 BPM</button>
+	  		<button onclick="document.getElementById('tempo').value = 130;tempo=130;">130 BPM</button>
+	  		<button onclick="document.getElementById('tempo').value = 140;tempo=140;">140 BPM</button>
+	  		<button onclick="document.getElementById('tempo').value = 150;tempo=150;">150 BPM</button>
+	  		<button onclick="document.getElementById('tempo').value = 160;tempo=160;">160 BPM</button>
+	  	</div>
+	  	<form>
+		    Beats per Minute: <input type="text" name="tempo" id="tempo" value="120">
+		</form>
+		</center>
+		<br><br>
+		</div>
+
+		<center><button style="font-size: 60px;margin-top:50px;" class="hvr-shutter-in-vertical" onclick="generate()">GENERATE</button></center>
+
+		<br><br>
+	  </div>
+
+<script>
+
+function generate()
+{
+
+	var songNames = ["furelise", "moonlightsonata", "turkishmarch", "takeonme", "everybodywantstoruletheworld", "athousandmiles"];
+
+	for (var i = 0; i < songNames.length; i++) {
+	    
+		if(document.getElementById(songNames[i]).checked)
+		{
+			songs += (songNames[i]+"-");
+		}
+
+	}
+
+	post("musicPlayer.php",{mode: 0, data: [songs, notes, tempo, synth]});
+
+}
+
+function post(path, params) {
+    var form = document.createElement("form");
+    form.setAttribute("method", "post");
+    form.setAttribute("action", path);
+
+    for(var key in params) {
+        if(params.hasOwnProperty(key)) {
+            var hiddenField = document.createElement("input");
+            hiddenField.setAttribute("type", "hidden");
+            hiddenField.setAttribute("name", key);
+            hiddenField.setAttribute("value", params[key]);
+
+            form.appendChild(hiddenField);
+        }
+    }
+
+    document.body.appendChild(form);
+    form.submit();
+}
+
+</script>
+
+</body>
+
+</html>
