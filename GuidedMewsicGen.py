@@ -18,6 +18,7 @@ import sys #argv and such
 import pysynth, pysynth_b, pysynth_c, pysynth_d, pysynth_e, pysynth_p, pysynth_s #all available synths
 from numpy.random import choice #weighted probability choosing
 import os
+from pydub import AudioSegment
 
 synths = {
 	'a': pysynth,
@@ -119,6 +120,7 @@ def generateNotes(songArray, numberOfNotes):
 
 def generateWave(synth,notes,tempo,fileLoc):
 	synthToUse.make_wav(generateNotes(notes,100), fn=fileLoc)
+	pydub
 
 for i in songsList:
 	combinedNotes += songs[i]

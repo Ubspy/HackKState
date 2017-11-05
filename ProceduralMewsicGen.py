@@ -2,7 +2,6 @@
 
 import pysynth, pysynth_b, pysynth_c, pysynth_d, pysynth_e, pysynth_p, pysynth_s
 import random
-from pydub import AudioSegment
 import math
 import sys
 
@@ -71,10 +70,10 @@ def generateNotePatern(listLength):
 
     for i in range(0, listLength - 1):
         chance = random.uniform(0, 1)
-        if chance <= 0.35:
+        if chance <= 0.43:
             # New note is played
             noteList.append(1)
-        elif chance >= 0.35 and chance <= 0.78:
+        elif chance >= 0.43 and chance <= 0.82:
             # Holds note
             noteList.append(2)
         else:
@@ -174,17 +173,17 @@ def generateNotes(length):
 
         # Checks chance
         if chance <= normalizeCurvePercents[0]:
-            space = -random.randrange(8, 10)
+            space = -random.randrange(7, 8)
         elif (chance > normalizeCurvePercents[0]) and (chance <= normalizeCurvePercents[1]):
-            space = -random.randrange(5, 7)
+            space = -random.randrange(4, 6)
         elif (chance > normalizeCurvePercents[1]) and (chance <= normalizeCurvePercents[2]):
-            space = -random.randrange(1, 4)
+            space = -random.randrange(1, 3)
         elif (chance > normalizeCurvePercents[2]) and (chance <= normalizeCurvePercents[3]):
-            space = random.randrange(1, 4)
+            space = random.randrange(1, 3)
         elif (chance > normalizeCurvePercents[3]) and (chance <= normalizeCurvePercents[4]):
-            space = random.randrange(5, 7)
+            space = random.randrange(4, 6)
         elif chance > normalizeCurvePercents[4]:
-            space = random.randrange(8, 10)
+            space = random.randrange(7, 8)
 
         nextNote = findNote(noteList[-1], noteList[-1][-1], space)
         noteList.append(nextNote)
@@ -215,21 +214,6 @@ def getInputValues():
     Input.synth = getSynth()
 
 
-def cleanUpSong():
-    # Opens new file
-    song = AudioSegment.from_file(Input.songName, format="wav")
-
-    # Adds gain to file
-    song += 5
-    
-    # Deletes empty 2 seconds at the end
-    duration = len(song)
-    song = song[:(duration - 1900)]
-    
-    # Exports it back out
-    song.export("sound.mp3", format="mp3")
-
-
 def generateMusic():
     cellularListLength = findBeatsInSong() # Finds beets in the song
     cellularList = generateNotePatern(cellularListLength) # Finds list of rythm notes
@@ -243,8 +227,6 @@ def generateMusic():
 
     # Exports file
     synths[Input.synth].make_wav(notesTuple, fn=Input.songName, bpm=Input.BPM, silent=False)
-
-    cleanUpSong()
 
 
 if len(sys.argv) == 5:
