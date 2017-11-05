@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>MewsicGen Procedural</title>
+
+	<meta version="1.0" charset="UTF-8" lang="en-us">
+
+	<!--Bootstrap-->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+</head>
+
+<style>
+	body
+	{
+		overflow: hidden;
+	}
+
+	#args
+	{
+		border: 1px solid black;
+		border-radius: 5px;
+		background-color: #262626;
+		height: 15%;
+	}
+
+	#in-args
+	{
+		color: #e3e6e8;
+		margin-left: 2.5%;
+		margin-top: 5.5%;
+	}
+
+	#number-in
+	{
+		width: 20%;
+		height: 9%;
+		position: absolute;
+		right: 5%;
+		top: 5.8%;
+	}
+
+	#number-in2
+	{
+		width: 20%;
+		height: 9%;
+		position: absolute;
+		right: 5%;
+		top: 24%;
+	}
+
+	#key-in
+	{
+		width: 20%;
+		position: absolute;
+		right: 5%;
+		top: 40%;
+	}
+
+	#synth-in
+	{
+		width: 20%;
+		position: absolute;
+		right: 5%;
+		top: 57%;
+	}
+
+	#generate-button
+	{
+		position: absolute;
+		bottom: 5%;
+		left: 33%;
+		width: 35%;
+		height: 12%;
+	}
+
+	#generate-button:hover
+	{
+		background-color: #9c9cb0;
+	}
+</style>
+
+
+<body>
+	<div class="jumbotron jumbotron-fluid" style="height:120vh;background-color:#8e8e8e !important;"/>
+		<div class="container">
+			<center>
+				<h1 class=".text-center" style="margin-top:1%">Procedural Generation</h1>
+				<p id="desc" style="margin-top:1.5%; margin-bottom:1.5%; font-size:20px"><strong>Arguments to generate song</strong> randomly generates a song based off a key, a bpm, and a length.</p>
+			</center>
+		</div>
+
+		<div class="container" style="height:260%; margin-top: 2%;">
+			<div class="col-md-3"></div>
+			<div class="col-sm-6" id="args">
+				<p id="in-args">Beats per Minute:</p>
+				<p id="in-args">Length (seconds):</p>
+				<p id="in-args">Key of the Song:</p>
+				<p id="in-args">Type of Synthesizer:</p>
+
+				<input type="text" id="number-in" value="0"></input>
+				<input type="text" id="number-in2" value="0"></input>
+
+				<select name="keys" id="key-in">
+					<option value="C">C</option>
+					<option value="F">F</option>
+					<option value="B-flat">B-Flat</option>
+					<option value="E-flat">E-Flat</option>
+					<option value="A-flat">A-Flat</option>
+					<option value="D-flat">D-Flat</option>
+					<option value="G-flat">G-Flat</option>
+					<option value="B">B</option>
+					<option value="E">E</option>
+					<option value="A">A</option>
+					<option value="D">D</option>
+					<option value="G">G</option>
+				</select> 
+
+				<select name="synths" id="synth-in">
+					<option value="synth-a">Synth A - Flute</option>
+					<option value="synth-b">Synth B - Piano</option>
+					<option value="synth-c">Synth C - Subtractive (Sawtooth Wave)</option>
+					<option value="synth-d">Synth D - Subtractive (Square Wave)</option>
+					<option value="synth-e">Synth E - Phase Modulation</option>
+					<option value="synth-p">Synth P - Subtractive (White Noise)</option>
+					<option value="synth-s">Synth S - Karplus-Strong</option>
+				</select>
+
+				<button onclick="toWriteHere();" id="generate-button">Generate</button>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</body>
+
+</html>
