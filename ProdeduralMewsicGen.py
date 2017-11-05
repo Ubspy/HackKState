@@ -202,7 +202,7 @@ def getInputValues():
 
 def cleanUpSong():
     # Opens new file
-    song = AudioSegment.from_wav("sound.wav")
+    song = AudioSegment.from_file(Input.songName, format="wav")
 
     # Adds gain to file
     song += 5
@@ -212,8 +212,7 @@ def cleanUpSong():
     song = song[:(duration - 1900)]
     
     # Exports it back out
-    song.export(Input.songName, "wav")
-
+    song.export("sound.mp3", format="mp3")
 
 
 def generateMusic():
