@@ -1,8 +1,6 @@
 <!DOCTYPE html>
-<html>
-
 <head>
-	<title>MewsicGen 1.0</title>
+	<title>MewsicGen v1.2</title>
 	<meta version="1.0" charset="UTF-8" lang="en-us">
 
 	<link rel='shortcut icon' type='image/x-icon' href='favicon.ico' />
@@ -16,103 +14,248 @@
 
 body
 {
-	overflow: hidden;
+	background-color:#8e8e8e;
 }
 
-/*.verticalLine {
-  border-left: thick solid black;
-  height:100vh;
-  margin-left: 550px;
-  color: black;
-}*/
-
-#proceduralGenButton
+a
 {
-	width: 45%;
-	height: 45%;
+	color:inherit;
+	text-decoration: none;
+}
+
+a:hover
+{
+	color:inherit;
+	text-decoration: none;
+}
+
+.button
+{
+	position: absolute;
+	width: 30%;
+	height: 35%;
+	border-style: solid;
+	border-color: black;
+	border-radius: 25px;
+
+	transition: opacity .3s;
+	cursor: pointer;
+}
+
+.button:hover
+{
+	opacity: 0.3;
+}
+
+.button-text
+{
+	position: absolute;
+	text-align: center;
+	vertical-align: middle;
+	margin-top: 15%;
+	margin-left: 5%;
+	margin-right: 5%;
+}
+
+.mobile-buttons
+{
+	display: none;
+}
+
+#title
+{
+	text-align: center;
+	font-size: 40px;
+}
+
+#subtitle
+{
+	text-align: center;
+}
+
+#procedural
+{
 	background-color: #f0ff8e;
-	position: absolute;
-	left:30px;
-	top:50%;
-	transition: opacity .3s;
-	cursor: pointer;
-	border: 1px dashed black;
-	padding:5%;
+	left: 12%;
+
 }
 
-#proceduralGenButton:hover
+#guided
 {
-	opacity: 0.3;
-}
-
-#guidedGenButton
-{
-	width: 45%;
-	height: 45%;
 	background-color: #8effb2;
-	position: absolute;
-	right:30px;
-	top:50%;
-	transition: opacity .3s;
-	cursor: pointer;
-	border: 1px dashed black;
-	padding:5%;
+	right: 12%;
 }
 
-#guidedGenButton:hover
+
+#desktop-buttons
 {
-	opacity: 0.3;
+	margin-top: 3%;
 }
 
-.unpretty {
-  color:inherit;
-  text-decoration: none;
- }
+/* Desktop */
+@media screen and (min-width: 1301px)
+{
+	body
+	{
+		overflow: hidden;
+	}
 
- .unpretty:hover {
-  color:inherit;
-  text-decoration: none;
- }
+	#header-img
+	{
+		width: 15%;
+		height: 15%;
+		margin-left: 42%;
+	}
+}
+
+/* Laptop */
+@media screen and (min-width: 601px) and (max-width: 1300px)
+{
+	body
+	{
+		overflow: hidden;
+	}
+
+	.button-text
+	{
+		margin-top: 20%;
+	}
+
+	#header-img
+	{
+		width: 20%;
+		height: 20%;
+		margin-left: 40%;
+	}
+
+	#big-text
+	{
+		font-size: 190%;
+	}
+
+	#little-text
+	{
+		font-size: 80%;
+	}
+}
+
+/* Mobile */
+@media screen and (max-width: 600px)
+{
+	.mobile-buttons
+	{
+		display: initial;
+	}
+
+	.button
+	{
+		width: 75%;
+		height: 25%;
+		border-style: solid;
+		border-color: black;
+		border-radius: 25px;
+	}
+
+	.button:hover
+	{
+		opacity: 1;
+	}
+
+	.button-text
+	{
+		margin-top: 5%;
+	}
+
+	#procedural
+	{
+		margin-top: -6%;
+	}
+
+	#guided
+	{
+		top: 73%;
+		transform: translateX(-1.5%);
+	}
+
+	#header-img
+	{
+		width: 50%;
+		height: 50%;
+		margin-left: 27%;
+		margin-bottom: -5%;
+	}
+
+	#title
+	{
+		font-size: 60px;
+	}
+
+	#desktop-buttons
+	{
+		display: none;
+	}
+
+	#big-text
+	{
+		font-size: 100%;
+	}
+
+	#little-text
+	{
+		font-size: 80%;
+	}
+}
 
 </style>
 
 <body>
+	<div class="container">
+		<img src="mewsiclogo.png" id="header-img"></img>
+	</div>
 
-	<div class="jumbotron jumbotron-fluid" style="height:120vh;background-color:#8e8e8e !important;">
-	  <div class="container">
-	    
-	    <!-- yeah whatever center is deprecated idk ok go away -->
-	  	<center>
-	  		<img style="width:128px;height:128px;" src="mewsiclogo.png">
-	  		<h1 class=".text-center">MewsicGen</h1>
-	  		<p id="desc"><em>Generates a random song -- first choose a method -- made for <a href="http://hackkstate.tech/">Hack K-State 2017</a></em></p><br>
-	  		<div class="verticalLine" ></div>
-	  		<a href="proceduralGeneration.html" class="unpretty"><div id="proceduralGenButton">
-	  			<center>
-	  				<h1>Procedural Generation</h1>
-	  				<p>Generates a random song using cellular autonoma, and a normalized curve algorithm. Uses keys from the cycle of fourths to determine valid notes to use in the song.</p>
-	  			</center>
-	  		</div></a>
-	  		<a href="guidedGeneration.html" class="unpretty"><div id="guidedGenButton">
-	  			<center>
-	  				<h1>Guided Generation</h1>
-	  				<p>Generates a weighted probability map from pre-existing songs using their notes and compiling their probabilities, and then using that to create multiple notes</p>
-	  			</center>
-	  		</div></a>
-	  	</center>
+	<div class="container">
+		<h1 id="title"><strong>MewsicGen</strong></h1>
+		<p id="subtitle"><em>An AI that writes it's own music! made for <a href="http://hackkstate.tech/">Hack K-State 2017</a></em></p>
+	</div>
 
-	  </div>
-	</div>	
+	<div class="container" id="desktop-buttons">
+		<div id="procedural" class="button">
+			<a href="proceduralGeneration.html">
+				<div class="button-text">
+	  				<h1 id="big-text">Procedural Generation</h1>
+	  				<p id="little-text">Generates a random song using cellular autonoma, and a normalized curve algorithm. Uses keys from the cycle of fourths to determine valid notes to use in the song.</p>
+	  			</div>
+	  		</a>
+		</div>
+		<div id="guided" class="button">
+			<a href="guidedGeneration.html">
+				<div class="button-text">
+					<h1 id="big-text">Guided Generation</h1>
+		  				<p id="little-text">Generates a weighted probability map from pre-existing songs using their notes and compiling their probabilities, and then using that to create multiple notes</p>
+		  		</div>
+		  	</a>
+		</div>
+	</div>
 
-	<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+	<div class="container mobile-buttons">
+		<div id="procedural" class="button">
+			<a href="proceduralGeneration.html">
+				<div class="button-text">
+	  				<h1 id="big-text"><strong>Procedural Generation</strong></h1>
+	  				<p id="little-text">Generates a random song using cellular autonoma, and a normalized curve algorithm. Uses keys from the cycle of fourths to determine valid notes to use in the song.</p>
+	  			</div>
+	  		</a>
+		</div>
+
+		<div id="guided" class="button">
+			<a href="guidedGeneration.html">
+				<div class="button-text">
+					<h1 id="big-text"><strong>Guided Generation</strong></h1>
+		  				<p id="little-text">Generates a weighted probability map from pre-existing songs using their notes and compiling their probabilities, and then using that to create multiple notes</p>
+		  		</div>
+		  	</a>
+		</div>
+	</div>
+
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
-
-	<script>
-	$(document).ready(function() {
-	  $('.jumbotron').hide().fadeIn(2000,function() {console.log("done")}); 
-	 });  
-	</script> 
 </body>
-
-</html>

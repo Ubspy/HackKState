@@ -3,6 +3,8 @@
 $mode = $_POST["mode"];
 $data = $_POST["data"];
 
+set_time_limit(0);
+
 if($mode == "0")
 {
 
@@ -19,7 +21,7 @@ if($mode == "0")
 	$pre = "/var/www/html/";
 	$relativeLoc = "randomsongs/".$uniq.".mp3";
 
-	exec("guidedmusicgen ".$notes." ".$synth." ".$songs." ".$tempo." ".$fileLocation);
+	exec("python3 /var/www/html/guidedMusicGen.py ".$notes." ".$synth." ".$songs." ".$tempo." ".$fileLocation);
 
 }
 elseif($mode == "1")
@@ -38,7 +40,7 @@ elseif($mode == "1")
 	$pre = "/var/www/html/";
 	$relativeLoc = "randomsongs/".$uniq.".mp3";
 
-	exec("proceduralmusicgen ".$bpm." ".$length." ".$key." ".$synth." ".$fileLocation);
+	exec("python3 /var/www/html/proceduralMusicGen.py ".$bpm." ".$length." ".$key." ".$synth." ".$fileLocation);
 }
 
 ?> 

@@ -16,7 +16,7 @@
 	body
 	{
 		overflow: hidden;
-	}
+	}   
 
 	#args
 	{
@@ -29,14 +29,14 @@
 	#in-args
 	{
 		color: #e3e6e8;
-		margin-left: 2.5%;
-		margin-top: 4%;
+		position: absolute;
+		left: 4%;
 	}
 
 	#number-in
 	{
 		width: 20%;
-		height: 9%;
+		height: 7%;
 		position: absolute;
 		right: 5%;
 		top: 5.8%;
@@ -45,10 +45,10 @@
 	#number-in2
 	{
 		width: 20%;
-		height: 9%;
+		height: 7%;
 		position: absolute;
 		right: 5%;
-		top: 24%;
+		top: 20%;
 	}
 
 	#key-in
@@ -56,7 +56,7 @@
 		width: 20%;
 		position: absolute;
 		right: 5%;
-		top: 40%;
+		top: 33%;
 	}
 
 	#synth-in
@@ -64,7 +64,7 @@
 		width: 20%;
 		position: absolute;
 		right: 5%;
-		top: 57%;
+		top: 46%;
 	}
 
 	#generate-button
@@ -80,6 +80,15 @@
 	{
 		background-color: #9c9cb0;
 	}
+
+	#warning
+	{
+		color: #e3e6e8;
+		position: absolute;
+		bottom: 20%;
+		left: 2.5%;		
+		font-size:128%;
+	}
 </style>
 
 
@@ -92,13 +101,13 @@
 			</center>
 		</div>
 
-		<div class="container" style="height:260%; margin-top: 2%;">
+		<div class="container" style="height:300%; margin-top: 2%;">
 			<div class="col-md-3"></div>
 			<div class="col-sm-6" id="args">
-				<p id="in-args">Beats per Minute:</p>
-				<p id="in-args">Length (seconds):</p>
-				<p id="in-args">Key of the Song:</p>
-				<p id="in-args">Type of Synthesizer:</p>
+				<p id="in-args" style="top: 5%;">Beats per Minute:</p>
+				<p id="in-args" style="top: 20%;">Length (seconds):</p>
+				<p id="in-args" style="top: 33%;">Key of the Song:</p>
+				<p id="in-args" style="top: 46%;">Type of Synthesizer:</p>
 
 				<input type="text" id="number-in" value="0"></input>
 				<input type="text" id="number-in2" value="0"></input>
